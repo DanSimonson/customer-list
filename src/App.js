@@ -19,20 +19,21 @@ class App extends Component {
         querySnapshot.forEach(doc => {
           docData.push(doc.data());
           documentArray.push(...docData);
-          console.log("documentArray: ", documentArray);
           docData.pop();
         });
-        this.setState({ data: documentArray }, () => console.log(this.state));
+        this.setState({ data: documentArray });
       })
       .catch(function(error) {
         console.log("Error getting document:", error);
       });
   }
   render() {
+    if (!this.state.data) {
+    }
     return (
       <div className="App">
         {/*<h1>customer list: {this.state.message}</h1> */}
-        <Table />
+        <Table data={this.state.data} />
       </div>
     );
   }

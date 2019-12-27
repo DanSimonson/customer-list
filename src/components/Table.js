@@ -1,6 +1,13 @@
-import React, { PropTypes } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 
-const Table = props => {
+function Table({ data }) {
+  /*if (data[0]) {
+    //return null;
+    console.log("props:", data[0].firstName);
+    console.log("props:", data[1].email);
+  }*/
+
   return (
     <table>
       <thead>
@@ -13,10 +20,23 @@ const Table = props => {
           <th>Status</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody>
+        {data.map(row => (
+          <tr key={row.userID}>
+            <td>{row.userID}</td>
+            <td>{row.firstName}</td>
+            <td>{row.lastName}</td>
+            <td>{row.email}</td>
+            <td>{row.cellPhone}</td>
+            <td>{row.status}</td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
+}
+Table.propTypes = {
+  type: PropTypes.array
 };
-Table.propTypes = {};
 
 export default Table;
