@@ -6,18 +6,21 @@ function Table({ data, loading }) {
   console.log("data: ", data);
   console.log("loading: ", loading);
   let showStatus;
-  if (loading) {
-    showStatus = (
-      <span>
-        <FontAwesomeIcon icon="thumbs-down" />
-      </span>
-    );
-  } else {
-    showStatus = (
-      <span>
-        <FontAwesomeIcon icon="thumbs-up" />
-      </span>
-    );
+  if (data[0]) {
+    console.log("data[0].status: ", data[0].status);
+    /*if (loading && data[0].status === false) {
+      showStatus = (
+        <span>
+          <FontAwesomeIcon icon="thumbs-down" />
+        </span>
+      );
+    } else {
+      showStatus = (
+        <span>
+          <FontAwesomeIcon icon="thumbs-up" />
+        </span>
+      );
+    }*/
   }
   return (
     <main>
@@ -41,8 +44,11 @@ function Table({ data, loading }) {
               <td>{row.email}</td>
               <td>{row.cellPhone}</td>
               <td>
-                {row.status}
-                <FontAwesomeIcon icon="thumbs-up" />
+                {row.status ? (
+                  <FontAwesomeIcon icon="thumbs-up" />
+                ) : (
+                  <FontAwesomeIcon icon="thumbs-down" />
+                )}
               </td>
             </tr>
           ))}
