@@ -6,6 +6,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       data: []
     };
   }
@@ -21,19 +22,19 @@ class App extends Component {
           documentArray.push(...docData);
           docData.pop();
         });
-        this.setState({ data: documentArray });
+        this.setState({
+          loading: false,
+          data: documentArray
+        });
       })
       .catch(function(error) {
         console.log("Error getting document:", error);
       });
   }
   render() {
-    if (!this.state.data) {
-    }
     return (
       <div className="App">
-        {/*<h1>customer list: {this.state.message}</h1> */}
-        <Table data={this.state.data} />
+        <Table data={this.state.data} loading={this.state.loading} />
       </div>
     );
   }
