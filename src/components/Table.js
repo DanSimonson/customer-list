@@ -2,8 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Table.css";
+
 function Table({ data }) {
   let showStatus;
+
+  const handleEdit = () => {};
 
   return (
     <main>
@@ -16,7 +19,7 @@ function Table({ data }) {
             <th>Email</th>
             <th>Cell-Phone</th>
             <th>Status</th>
-            <th>
+            <th className="editIcon">
               <FontAwesomeIcon icon="user-plus" />
             </th>
           </tr>
@@ -36,7 +39,7 @@ function Table({ data }) {
                   <FontAwesomeIcon icon="thumbs-down" />
                 )}
               </td>
-              <td>
+              <td className="editIcon" onClick={handleEdit}>
                 <FontAwesomeIcon icon="edit" />
               </td>
             </tr>
