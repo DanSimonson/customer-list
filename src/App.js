@@ -6,7 +6,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
       data: []
     };
   }
@@ -34,7 +33,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Table data={this.state.data} loading={this.state.loading} />
+        <Table data={this.state.data} />
       </div>
     );
   }

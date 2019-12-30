@@ -2,26 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Table.css";
-function Table({ data, loading }) {
-  console.log("data: ", data);
-  console.log("loading: ", loading);
+function Table({ data }) {
   let showStatus;
-  if (data[0]) {
-    console.log("data[0].status: ", data[0].status);
-    /*if (loading && data[0].status === false) {
-      showStatus = (
-        <span>
-          <FontAwesomeIcon icon="thumbs-down" />
-        </span>
-      );
-    } else {
-      showStatus = (
-        <span>
-          <FontAwesomeIcon icon="thumbs-up" />
-        </span>
-      );
-    }*/
-  }
+
   return (
     <main>
       <table>
@@ -33,6 +16,9 @@ function Table({ data, loading }) {
             <th>Email</th>
             <th>Cell-Phone</th>
             <th>Status</th>
+            <th>
+              <FontAwesomeIcon icon="user-plus" />
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -49,6 +35,9 @@ function Table({ data, loading }) {
                 ) : (
                   <FontAwesomeIcon icon="thumbs-down" />
                 )}
+              </td>
+              <td>
+                <FontAwesomeIcon icon="edit" />
               </td>
             </tr>
           ))}

@@ -8,11 +8,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faThumbsDown,
   faThumbsUp,
-  faCoffee,
-  faCheckSquare
+  faEdit,
+  faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faThumbsDown, faThumbsUp, faCoffee, faCheckSquare);
+library.add(faEdit, faUserPlus, faThumbsDown, faThumbsUp);
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
