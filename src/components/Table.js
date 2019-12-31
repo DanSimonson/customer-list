@@ -43,6 +43,10 @@ class Table extends Component {
                 </td>
                 <td className="editIcon">
                   <FontAwesomeIcon icon="edit" onClick={this.handleEdit} />
+                  { this.props.showMenu ?
+                  ( <div className='menu'> <button>Edit</button> <button>Delete</button> </div> ) 
+                  : ( null ) 
+                  } 
                 </td>
               </tr>
             ))}

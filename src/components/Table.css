@@ -36,3 +36,7 @@ ul.dropdown {
 ul.dropdown:hover {
   display: block;
 }
+.editIcon{
+  width: 100px;
+  height: 100px;
+}
