@@ -7,6 +7,8 @@ class App extends Component {
     super(props);
     this.state = {
       showMenu: false,
+      X: null,
+      Y: null,
       data: []
     };
   }

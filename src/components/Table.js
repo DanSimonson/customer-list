@@ -1,15 +1,60 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import PropTypes, { nominalTypeHack } from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from 'styled-components';
 import "./Table.css";
+/**left: ${Y};
+    top: ${X}
+    position: fixed; */
+const Div = styled.div`
+    
+    width: 20px;
+    background-color: white;
+    border: 1px solid grey;
+    box-shadow: 0 1px 2px -2px grey;
+    z-index: 999;  
+`;
 
 class Table extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      X: null,
+      Y: null, 
+    };
+  }
   //console.log("props: ", this.props.data);
-  handleEdit = () => {
+  handleEdit = (event, ID) => {
     this.props.editToggle();
+
+    let x = event.clientX -180
+    let y = event.clientY +26 
+    console.log('x: ', x)
+    console.log('y: ', y)
+    this.setState({
+      X: x,
+      Y: y
+    }, () => {
+      console.log('state x: ', this.state.X)
+      console.log('state y: ', this.state.Y)
+    })
     //console.log("showMenu: ", showMenu);
   };
+  
+  
   render() {
+    const divStyle = {
+      
+      left: `${this.X}`,
+      top: `${this.Y}`,
+      position: 'relative',
+      width: '100px',
+      backgroundColor: 'white',
+      border: '1px solid grey',
+      boxShadow: '0 1px 2px -2px grey',
+      zIndex: 999,
+    }
+
     return (
       <main>
         <table>
@@ -42,22 +87,33 @@ class Table extends Component {
                   )}
                 </td>
                 <td className="editIcon">
-                  <FontAwesomeIcon icon="edit" onClick={this.handleEdit} />
-                  { this.props.showMenu ?
-                  ( <div className='menu'> <button>Edit</button> <button>Delete</button> </div> ) 
+                  <FontAwesomeIcon icon="edit" onClick={(event) => {event.persist();this.handleEdit(event,row.userID,)}} />
+                  
+                  {/*{ this.props.showMenu ?
+                  ( ( <div> <button>Edit</button> <button>Delete</button> </div> )  ) 
                   : ( null ) 
-                  } 
+                  } */}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        {this.props.showMenu && <div style={divStyle}><button>Edit</button> <button>Delete</button></div>}
       </main>
+      
     );
   }
 }
 Table.propTypes = {
   type: PropTypes.array
 };
+/*class Box extends Component{
+  render(){
+    return(
+      <Div> <button>Edit</button> <button>Delete</button> </Div>
+    )
+  }
+}*/
 
 export default Table;
+ 
