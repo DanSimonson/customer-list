@@ -1,59 +1,69 @@
 import React, { Component } from "react";
 import PropTypes, { nominalTypeHack } from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from 'styled-components';
+import { withRouter, NavLink } from "react-router-dom";
+//import styled from 'styled-components';
 import "./Table.css";
 /**left: ${Y};
     top: ${X}
     position: fixed; */
-const Div = styled.div`
+/*const Div = styled.div`
     
     width: 20px;
     background-color: white;
     border: 1px solid grey;
     box-shadow: 0 1px 2px -2px grey;
     z-index: 999;  
-`;
+`;*/
 
 class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
       X: null,
-      Y: null, 
+      Y: null
+      //toEdit: false
     };
   }
+  handleDelete = (event, ID) => {};
   //console.log("props: ", this.props.data);
   handleEdit = (event, ID) => {
     this.props.editToggle();
+    /*this.setState({
+      toEdit: true
+    });*/
 
-    let x = event.clientX -180
-    let y = event.clientY +26 
-    console.log('x: ', x)
-    console.log('y: ', y)
-    this.setState({
-      X: x,
-      Y: y
-    }, () => {
-      console.log('state x: ', this.state.X)
-      console.log('state y: ', this.state.Y)
-    })
+    //console.log("props", this.props);
+    //this.props.history.push("/edit");
+
+    /*let x = event.clientX - 180;
+    let y = event.clientY + 26;
+    console.log("x: ", x);
+    console.log("y: ", y);
+    this.setState(
+      {
+        X: x,
+        Y: y
+      },
+      () => {
+        console.log("state x: ", this.state.X);
+        console.log("state y: ", this.state.Y);
+      }
+    );*/
     //console.log("showMenu: ", showMenu);
   };
-  
-  
+
   render() {
     const divStyle = {
-      
-      left: `${this.X}`,
-      top: `${this.Y}`,
-      position: 'relative',
-      width: '100px',
-      backgroundColor: 'white',
-      border: '1px solid grey',
-      boxShadow: '0 1px 2px -2px grey',
-      zIndex: 999,
-    }
+      //left: `${this.X}`,
+      //top: `${this.Y}`,
+      //position: "relative",
+      width: "100px",
+      backgroundColor: "white",
+      border: "1px solid grey",
+      boxShadow: "0 1px 2px -2px grey",
+      zIndex: 999
+    };
 
     return (
       <main>
@@ -66,8 +76,12 @@ class Table extends Component {
               <th>Email</th>
               <th>Cell-Phone</th>
               <th>Status</th>
-              <th className="editIcon">
-                <FontAwesomeIcon icon="user-plus" />
+              <th>
+                <NavLink to="/add">
+                  <button>
+                    <FontAwesomeIcon icon="user-plus" className="editIco" />
+                  </button>
+                </NavLink>
               </th>
             </tr>
           </thead>
@@ -86,21 +100,35 @@ class Table extends Component {
                     <FontAwesomeIcon icon="thumbs-down" />
                   )}
                 </td>
-                <td className="editIcon">
-                  <FontAwesomeIcon icon="edit" onClick={(event) => {event.persist();this.handleEdit(event,row.userID,)}} />
-                  
-                  {/*{ this.props.showMenu ?
-                  ( ( <div> <button>Edit</button> <button>Delete</button> </div> )  ) 
-                  : ( null ) 
-                  } */}
+                <td>
+                  <NavLink to="/edit">
+                    <button>
+                      <FontAwesomeIcon
+                        className="editIco"
+                        icon="edit"
+                        onClick={event => {
+                          event.persist();
+                          this.handleEdit(event, row.userID);
+                        }}
+                      />
+                    </button>{" "}
+                  </NavLink>
+                  <button>
+                    <FontAwesomeIcon
+                      className="editIco"
+                      icon="trash"
+                      onClick={event => {
+                        event.persist();
+                        this.handleDelete(event, row.userID);
+                      }}
+                    />
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        {this.props.showMenu && <div style={divStyle}><button>Edit</button> <button>Delete</button></div>}
       </main>
-      
     );
   }
 }
@@ -115,5 +143,4 @@ Table.propTypes = {
   }
 }*/
 
-export default Table;
- 
+export default withRouter(Table);

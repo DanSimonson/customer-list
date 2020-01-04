@@ -1,62 +1,21 @@
 import React, { Component } from "react";
 import "./App.css";
 import firebase from "./Firestore";
-import Table from "./components/Table";
+import { Route, BrowserRouter } from "react-router-dom";
+//import Table from "./components/Table";
+import Home from "./components/Home";
+import Edit from "./components/Edit";
+import Add from "./components/Add";
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showMenu: false,
-      X: null,
-      Y: null,
-      data: []
-    };
-  }
-  editToggle = () => {
-    this.setState(
-      prevState => ({
-        showMenu: !prevState.showMenu
-      }),
-      () => {
-        console.log("showMenu: ", this.state.showMenu);
-      }
-    );
-    /*this.setState({ showMenu: !this.showMenu }, () => {
-      console.log("showMenu: ", this.state.showMenu);
-    });*/
-  };
-
-  componentDidMount() {
-    const docData = [];
-    let documentArray = [];
-    const db = firebase.firestore();
-    db.collection("customer")
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          docData.push(doc.data());
-          documentArray.push(...docData);
-          docData.pop();
-        });
-        this.setState({
-          loading: false,
-          data: documentArray
-        });
-      })
-      .catch(function(error) {
-        console.log("Error getting document:", error);
-      });
-  }
-
   render() {
     return (
-      <div className="App">
-        <Table
-          data={this.state.data}
-          showMenu={this.state.showMenu}
-          editToggle={this.editToggle}
-        />
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Route exact path="/" component={Home} />
+          <Route path="/edit" component={Edit} />
+          <Route path="/add" component={Add} />
+        </div>
+      </BrowserRouter>
     );
   }
 }

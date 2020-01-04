@@ -25,6 +25,9 @@ table {
 .editIcon:hover {
   cursor: pointer;
 }
+.editIco:hover {
+  cursor: pointer;
+}
 ul.dropdown {
   min-width: 100%; /* Set width of the dropdown */
   background: #f2f2f2;
@@ -36,7 +39,7 @@ ul.dropdown {
 ul.dropdown:hover {
   display: block;
 }
-.editIcon{
+.editIcon {
   width: 100px;
   height: 100px;
 }
@@ -47,4 +50,8 @@ ul.dropdown:hover {
   border: 1px solid grey;
   box-shadow: 0 1px 2px -2px grey;
   z-index: 1;
+}
+.menu {
+  background: white;
+  position: absolute;
 }
