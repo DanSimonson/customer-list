@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../Firestore";
 import "./Add.css";
+const nanoid = require('nanoid')
+
 
 const Add = () => {
   const [firstName, setFirstName] = useState("");
@@ -13,14 +15,26 @@ const Add = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
+    postData()
   };
-
-  useEffect(async () => {
+  const postData = () => {
+    const id = nanoid()
     const db = firebase.firestore();
-    db.collection("cities")
+    let status
+    if(toggleOn === 'toggleOn'){
+      status = true
+    }else if(toggleOff === 'toggleOff'){
+      status = false
+    }
+
+    db.collection("customer")
       .add({
-        //name: "Tokyo",
-        //country: "Japan"
+        cellPhone: cellPhone,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        status: status,
+        userID: id
       })
       .then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
@@ -28,11 +42,7 @@ const Add = () => {
       .catch(function(error) {
         console.error("Error adding document: ", error);
       });
-    /*const result = await axios(
-      "https://hn.algolia.com/api/v1/search?query=redux"
-    );
-    setData(result.data);*/
-  });
+  }
 
   return (
     <form onSubmit={handleSubmit}>
