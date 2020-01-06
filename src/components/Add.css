@@ -24,7 +24,7 @@ input[type="radio"]:checked + label {
 .wrapOne {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .wrapTwo {
   display: flex;
