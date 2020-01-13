@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../Firestore";
 import "./Add.css";
-const nanoid = require('nanoid')
-
+import {
+  Formik,
+  Field,
+  Form,
+  useField,
+  FieldAttributes,
+  FieldArray
+} from "formik";
+const nanoid = require("nanoid");
 
 const Add = () => {
   const [firstName, setFirstName] = useState("");
@@ -13,18 +20,18 @@ const Add = () => {
   const [toggleOff, setToggleOff] = useState("");
   const [data, setData] = useState({ hits: [] });
 
-  const handleSubmit = evt => {
+  /*const handleSubmit = evt => {
     evt.preventDefault();
-    postData()
-  };
+    postData();
+  };*/
   const postData = () => {
-    const id = nanoid()
+    const id = nanoid();
     const db = firebase.firestore();
-    let status
-    if(toggleOn === 'toggleOn'){
-      status = true
-    }else if(toggleOff === 'toggleOff'){
-      status = false
+    let status;
+    if (toggleOn === "toggleOn") {
+      status = true;
+    } else if (toggleOff === "toggleOff") {
+      status = false;
     }
 
     db.collection("customer")
@@ -42,10 +49,48 @@ const Add = () => {
       .catch(function(error) {
         console.error("Error adding document: ", error);
       });
-  }
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
+      <Formik initialValues={{ firstName: "", email: "" }}>
+        {({ values, errors, touched, handleChange, handleBlur }) => (
+          <form>
+            {JSON.stringify(values)}
+            <div className="wrapOne">
+              <label htmlFor="firstName">
+                firstName:
+                <input
+                  placeholder="first name"
+                  name="firstName"
+                  type="text"
+                  id="firstName"
+                  placeholder="Enter first name"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.firstName}
+                />
+              </label>
+              <label htmlFor="email">
+                Email:
+                <input
+                  placeholder="email"
+                  name="email"
+                  type="email"
+                  id="email"
+                  placeholder="Enter email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                />
+              </label>
+            </div>
+          </form>
+        )}
+      </Formik>
+    </div>
+
+    /* <form onSubmit={handleSubmit}>
       <div className="wrapOne">
         <label className="padLabel">
           First Name:
@@ -110,7 +155,7 @@ const Add = () => {
         </label>
       </div>
       <input type="submit" value="Submit" />
-    </form>
+  </form>*/
   );
 };
 
