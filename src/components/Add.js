@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../Firestore";
 import "./Add.css";
+import * as Yup from "yup";
 import {
   Formik,
   Field,
@@ -11,7 +12,7 @@ import {
 } from "formik";
 const nanoid = require("nanoid");
 
-const Add = () => {
+export default function Add() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -51,9 +52,27 @@ const Add = () => {
       });
   };
 
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string()
+      .min(1, "Must have a character")
+      .max(255, "Must be shorter thant 255")
+      .required("Must enter a name"),
+    email: Yup.string()
+      .email("Must be valid email")
+      .max(255, "Must be shorter thant 255")
+      .required("Must enter an email")
+  });
+
+  function onSubmit(event) {
+    event.preventDefault();
+  }
+
   return (
     <div>
-      <Formik initialValues={{ firstName: "", email: "" }}>
+      <Formik
+        initialValues={{ firstName: "", email: "" }}
+        validationSchema={validationSchema}
+      >
         {({ values, errors, touched, handleChange, handleBlur }) => (
           <form>
             {JSON.stringify(values)}
@@ -69,6 +88,9 @@ const Add = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.firstName}
+                  className={
+                    touched.firstName && errors.firstName ? "has-error" : null
+                  }
                 />
               </label>
               <label htmlFor="email">
@@ -82,8 +104,12 @@ const Add = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
+                  className={touched.email && errors.email ? "has-error" : null}
                 />
               </label>
+              <div className="formik-submit">
+                <button type="submit">Submit</button>
+              </div>
             </div>
           </form>
         )}
@@ -157,6 +183,6 @@ const Add = () => {
       <input type="submit" value="Submit" />
   </form>*/
   );
-};
+}
 
-export default Add;
+//export default Add;
