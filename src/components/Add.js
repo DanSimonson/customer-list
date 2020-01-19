@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../Firestore";
 import "./Add.css";
+import FormikForm from "./FormikForm";
 import * as Yup from "yup";
 import {
   Formik,
@@ -10,6 +11,7 @@ import {
   FieldAttributes,
   FieldArray
 } from "formik";
+
 const nanoid = require("nanoid");
 
 export default function Add() {
@@ -69,7 +71,8 @@ export default function Add() {
 
   return (
     <div>
-      <Formik
+      <FormikForm />
+      {/*<Formik
         initialValues={{ firstName: "", email: "" }}
         validationSchema={validationSchema}
       >
@@ -113,7 +116,7 @@ export default function Add() {
             </div>
           </form>
         )}
-      </Formik>
+      </Formik>*/}
     </div>
 
     /* <form onSubmit={handleSubmit}>
