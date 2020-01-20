@@ -1,7 +1,7 @@
 import React from "react";
 import Autosuggest from "react-autosuggest";
-import { Formik } from "formik";
-import { TextField, Button } from "@material-ui/core";
+import { Formik, Field, Form } from "formik";
+import { TextField, Button, Radio, Checkbox } from "@material-ui/core";
 import * as Yup from "yup";
 import axios from "axios";
 import Error from "./Errors";
@@ -64,6 +64,7 @@ export default function FormikForm() {
   return (
     <Formik
       initialValues={{
+        active: "",
         firstName: "",
         lastName: "",
         name: "",
@@ -101,14 +102,25 @@ export default function FormikForm() {
         handleBlur,
         handleSubmit,
         isSubmitting,
-        setFieldValue
+        setFieldValue,
+        checked
       }) => (
-        <form onSubmit={handleSubmit}>
+        <Form>
+          {/*<form onSubmit={handleSubmit}>*/}
+          {JSON.stringify(values)}
           <h2>A Great Form</h2>
 
           <div className="input-row">
             <label>First Name</label>
-            <input
+            <Field
+              name="firstName"
+              type="input"
+              as={TextField}
+              className={
+                touched.firstName && errors.firstName ? "has-error" : null
+              }
+            />
+            {/*<input
               type="text"
               name="firstName"
               onChange={handleChange}
@@ -117,12 +129,20 @@ export default function FormikForm() {
               className={
                 touched.firstName && errors.firstName ? "has-error" : null
               }
-            />
+            />*/}
             <Error touched={touched.firstName} message={errors.firstName} />
           </div>
           <div className="input-row">
             <label>Last Name</label>
-            <input
+            <Field
+              name="lastName"
+              type="input"
+              as={TextField}
+              className={
+                touched.lastName && errors.lastName ? "has-error" : null
+              }
+            />
+            {/*<input
               type="text"
               name="lastName"
               onChange={handleChange}
@@ -131,27 +151,67 @@ export default function FormikForm() {
               className={
                 touched.lastName && errors.lastName ? "has-error" : null
               }
-            />
+            />*/}
             <Error touched={touched.lastName} message={errors.lastName} />
           </div>
           <div className="input-row">
             <label>Email</label>
-            <input
+            <Field
+              name="email"
+              type="text"
+              as={TextField}
+              className={touched.email && errors.email ? "has-error" : null}
+            />
+            {/*<input
               type="text"
               name="email"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
               className={touched.email && errors.email ? "has-error" : null}
-            />
+            />*/}
             <Error touched={touched.email} message={errors.email} />
           </div>
           <div className="input-row">
+            <label>Active</label>
+            <Field
+              name="gender"
+              render={({ field }) => (
+                <>
+                  <div className="input-row">
+                    <input
+                      {...field}
+                      id="male"
+                      value="male"
+                      checked={field.value === "male"}
+                      name="type"
+                      type="radio"
+                    />
+                    <label htmlFor="male">Male</label>
+                  </div>
+
+                  <div className="input-row">
+                    <input
+                      {...field}
+                      id="female"
+                      value="female"
+                      name="type"
+                      checked={field.value === "female"}
+                      type="radio"
+                    />
+                    <label htmlFor="female">Female</label>
+                  </div>
+                </>
+              )}
+            />
+          </div>
+          <div>
             <button type="submit" disabled={isSubmitting}>
               Submit
             </button>
           </div>
-        </form>
+          {/*</form>*/}
+        </Form>
       )}
     </Formik>
   );
