@@ -64,6 +64,7 @@ export default function FormikForm() {
   return (
     <Formik
       initialValues={{
+        status: "",
         active: "",
         firstName: "",
         lastName: "",
@@ -173,37 +174,13 @@ export default function FormikForm() {
             <Error touched={touched.email} message={errors.email} />
           </div>
           <div className="input-row">
+            <label>Status</label>
+          </div>
+          <div className="input-row">
             <label>Active</label>
-            <Field
-              name="gender"
-              render={({ field }) => (
-                <>
-                  <div className="input-row">
-                    <input
-                      {...field}
-                      id="male"
-                      value="male"
-                      checked={field.value === "male"}
-                      name="type"
-                      type="radio"
-                    />
-                    <label htmlFor="male">Male</label>
-                  </div>
-
-                  <div className="input-row">
-                    <input
-                      {...field}
-                      id="female"
-                      value="female"
-                      name="type"
-                      checked={field.value === "female"}
-                      type="radio"
-                    />
-                    <label htmlFor="female">Female</label>
-                  </div>
-                </>
-              )}
-            />
+            <Field name="status" type="radio" value="active" as={Radio} />
+            <label>Inactive</label>
+            <Field name="status" type="radio" value="inactive" as={Radio} />
           </div>
           <div>
             <button type="submit" disabled={isSubmitting}>

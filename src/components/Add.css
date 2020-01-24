@@ -1,21 +1,21 @@
-input[type="radio"] {
+/*input[type="radio"] {
   display: none;
-}
+}*/
 
-label {
+/*label {
   padding: 10px 20px;
   background-color: orange;
   border: thin solid darkorange;
   border-radius: 10px;
   margin: 5px;
   display: inline-block;
-}
+}*/
 
-input[type="radio"]:checked + label {
+/*input[type="radio"]:checked + label {
   background-color: darkblue;
   cursor: default;
   color: #e6e6e6;
-}
+}*/
 .wrapForm {
   display: flex;
   flex-direction: column;
