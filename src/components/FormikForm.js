@@ -7,6 +7,10 @@ import axios from "axios";
 import Error from "./Errors";
 
 const ValidationSchema = Yup.object().shape({
+  cellPhone: Yup.string()
+    .min(1, "Too Short!")
+    .max(255, "Too Long!")
+    .required("Required"),
   firstName: Yup.string()
     .min(1, "Too Short!")
     .max(255, "Too Long!")
@@ -66,6 +70,7 @@ export default function FormikForm() {
       initialValues={{
         status: "",
         active: "",
+        cellPhone: "",
         firstName: "",
         lastName: "",
         name: "",
@@ -172,6 +177,28 @@ export default function FormikForm() {
               className={touched.email && errors.email ? "has-error" : null}
             />*/}
             <Error touched={touched.email} message={errors.email} />
+          </div>
+          <div className="input-row">
+            <label>Cell Phone</label>
+            <Field
+              name="cellPhone"
+              type="input"
+              as={TextField}
+              className={
+                touched.cellPhone && errors.cellPhone ? "has-error" : null
+              }
+            />
+            {/*<input
+              type="text"
+              name="firstName"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.name}
+              className={
+                touched.firstName && errors.firstName ? "has-error" : null
+              }
+            />*/}
+            <Error touched={touched.cellPhone} message={errors.cellPhone} />
           </div>
           <div className="input-row">
             <label>Status</label>
