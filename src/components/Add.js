@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../Firestore";
 import "./Add.css";
-import FormikForm from "./FormikForm";
+import AddForm from "./AddForm";
 import * as Yup from "yup";
 import {
   Formik,
@@ -23,10 +23,6 @@ export default function Add() {
   const [toggleOff, setToggleOff] = useState("");
   const [data, setData] = useState({ hits: [] });
 
-  /*const handleSubmit = evt => {
-    evt.preventDefault();
-    postData();
-  };*/
   const postData = () => {
     const id = nanoid();
     const db = firebase.firestore();
@@ -54,7 +50,7 @@ export default function Add() {
       });
   };
 
-  const validationSchema = Yup.object().shape({
+  /*const validationSchema = Yup.object().shape({
     firstName: Yup.string()
       .min(1, "Must have a character")
       .max(255, "Must be shorter thant 255")
@@ -63,15 +59,16 @@ export default function Add() {
       .email("Must be valid email")
       .max(255, "Must be shorter thant 255")
       .required("Must enter an email")
-  });
+  });*/
 
-  function onSubmit(event) {
+  /*function onSubmit(event) {
     event.preventDefault();
-  }
+  }*/
 
   return (
     <div>
-      <FormikForm />
+      <AddForm />
+
       {/*<Formik
         initialValues={{ firstName: "", email: "" }}
         validationSchema={validationSchema}
