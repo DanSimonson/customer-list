@@ -9,10 +9,10 @@ th {
   padding: 1rem;
 }
 td {
-  background-color: lightgrey;
+  /*background-color: lightgrey;*/
 }
 th {
-  background-color: darkgrey;
+  /*background-color: darkgrey;*/
 }
 main {
   margin: 0 auto;
@@ -20,7 +20,7 @@ main {
 }
 table {
   width: 100%;
-  border: 5px solid red;
+  /*border: 5px solid red;*/
 }
 .editIcon:hover {
   cursor: pointer;

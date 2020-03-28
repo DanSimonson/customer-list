@@ -28,7 +28,10 @@ class Table extends Component {
   handleDelete = (event, ID) => {};
   //console.log("props: ", this.props.data);
   handleEdit = (event, ID) => {
-    this.props.editToggle();
+    //this.props.editToggle();
+    //push to edit page with correct route id stored in location
+    this.props.history.push("/edit", { id: ID });
+
     /*this.setState({
       toEdit: true
     });*/
@@ -101,18 +104,18 @@ class Table extends Component {
                   )}
                 </td>
                 <td>
-                  <NavLink to="/edit">
-                    <button>
-                      <FontAwesomeIcon
-                        className="editIco"
-                        icon="edit"
-                        onClick={event => {
-                          event.persist();
-                          this.handleEdit(event, row.userID);
-                        }}
-                      />
-                    </button>{" "}
-                  </NavLink>
+                  {/*<NavLink to="/edit">*/}
+                  <button>
+                    <FontAwesomeIcon
+                      className="editIco"
+                      icon="edit"
+                      onClick={event => {
+                        event.persist();
+                        this.handleEdit(event, row.userID);
+                      }}
+                    />
+                  </button>{" "}
+                  {/*</NavLink>*/}
                   <button>
                     <FontAwesomeIcon
                       className="editIco"

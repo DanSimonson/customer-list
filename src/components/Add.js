@@ -45,6 +45,7 @@ export default function Add() {
         lastName: lastName,
         status: status,
         userID: id
+        //documentRefID: docRef.id
       })
       .then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);

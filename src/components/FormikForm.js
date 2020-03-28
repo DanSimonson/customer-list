@@ -114,7 +114,6 @@ export default function FormikForm() {
         <Form>
           {/*<form onSubmit={handleSubmit}>*/}
           {JSON.stringify(values)}
-          <h2>A Great Form</h2>
 
           <div className="input-row">
             <label>First Name</label>
