@@ -90,14 +90,15 @@ export default function FormikForm() {
         return errors;
       }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        setSubmitting(true);
+        console.log("value: ", values);
+        /*setSubmitting(true);
 
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
           resetForm();
           setCountry("");
           setSubmitting(false);
-        }, 500);
+        }, 500);*/
       }}
     >
       {({
@@ -111,8 +112,7 @@ export default function FormikForm() {
         setFieldValue,
         checked
       }) => (
-        <Form>
-          {/*<form onSubmit={handleSubmit}>*/}
+        <form onSubmit={handleSubmit}>
           {JSON.stringify(values)}
 
           <div className="input-row">
@@ -209,12 +209,9 @@ export default function FormikForm() {
             <Field name="status" type="radio" value="inactive" as={Radio} />
           </div>
           <div>
-            <button type="submit" disabled={isSubmitting}>
-              Submit
-            </button>
+            <button type="submit">Submit</button>
           </div>
-          {/*</form>*/}
-        </Form>
+        </form>
       )}
     </Formik>
   );
