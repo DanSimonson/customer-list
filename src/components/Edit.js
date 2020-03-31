@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../Firestore";
-//import "./Add.css";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 import "./Edit.css";
-import FormikForm from "./FormikForm";
-import * as Yup from "yup";
-import {
-  Formik,
-  Field,
-  Form,
-  useField,
-  FieldAttributes,
-  FieldArray
-} from "formik";
 
 const nanoid = require("nanoid");
 
+const useStyles = makeStyles({
+  root: {
+    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+    border: 0,
+    borderRadius: 3,
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+    color: "white",
+    height: 48,
+    padding: "0 30px"
+  }
+});
+
 export default function Edit(props) {
+  const classes = useStyles();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,8 +31,21 @@ export default function Edit(props) {
   console.log("props.location.state.id: ", props.location.state.id);
 
   useEffect(() => {
+    const db = firebase.firestore();
+    db.collection("customer")
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          if (props.location.state.id === doc.data().userID) {
+            console.log("userID found: ", props.location.state.id);
+            setFirstName(doc.data().firstName);
+            console.log("doc.data().firstName: ", doc.data().firstName);
+          }
+        });
+      });
     return () => {
-      console.log("will unmount");
+      //console.log("will unmount");
     };
   }, []);
   /*const handleSubmit = evt => {
@@ -64,7 +81,7 @@ export default function Edit(props) {
       });
   };*/
 
-  const validationSchema = Yup.object().shape({
+  /*const validationSchema = Yup.object().shape({
     firstName: Yup.string()
       .min(1, "Must have a character")
       .max(255, "Must be shorter thant 255")
@@ -73,15 +90,24 @@ export default function Edit(props) {
       .email("Must be valid email")
       .max(255, "Must be shorter thant 255")
       .required("Must enter an email")
-  });
+  });*/
 
   function onSubmit(event) {
     event.preventDefault();
   }
 
   return (
-    <div>
-      <FormikForm />
+    <React.Fragment>
+      <form noValidate autoComplete="off">
+        <TextField
+          id="outlined-basic"
+          label="First Name"
+          variant="outlined"
+          value={firstName}
+          onChange={e => setFirstName(e.target.value)}
+        />
+      </form>
+      {/*<FormikForm />*/}
       {/*<Formik
         initialValues={{ firstName: "", email: "" }}
         validationSchema={validationSchema}
@@ -127,7 +153,7 @@ export default function Edit(props) {
           </form>
         )}
       </Formik>*/}
-    </div>
+    </React.Fragment>
 
     /* <form onSubmit={handleSubmit}>
       <div className="wrapOne">
