@@ -3,6 +3,13 @@ import firebase from "../Firestore";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import "./Edit.css";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+
+import { FormHelperText } from "@material-ui/core";
 
 const nanoid = require("nanoid");
 
@@ -15,11 +22,20 @@ const useStyles = makeStyles({
     color: "white",
     height: 48,
     padding: "0 30px"
+  },
+  myForm: {
+    display: "flex",
+    flexDirection: "column",
+    justifyItems: "center"
+  },
+  myTextField: {
+    marginBottom: "18px"
   }
 });
 
 export default function Edit(props) {
   const classes = useStyles();
+  const [selected, setSelected] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,7 +44,7 @@ export default function Edit(props) {
   const [toggleOff, setToggleOff] = useState("");
   const [data, setData] = useState({ hits: [] });
   //console.log("props: ", props);
-  console.log("props.location.state.id: ", props.location.state.id);
+  //console.log("props.location.state.id: ", props.location.state.id);
 
   useEffect(() => {
     const db = firebase.firestore();
@@ -38,9 +54,17 @@ export default function Edit(props) {
         querySnapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
           if (props.location.state.id === doc.data().userID) {
-            console.log("userID found: ", props.location.state.id);
+            //console.log("userID found: ", props.location.state.id);
+            console.log("doc.data().status: ", doc.data().status);
             setFirstName(doc.data().firstName);
-            console.log("doc.data().firstName: ", doc.data().firstName);
+            setLastName(doc.data().lastName);
+            setEmail(doc.data().email);
+            setCellPhone(doc.data().cellPhone);
+            if (doc.data().status) {
+              setSelected("Active");
+            } else {
+              setSelected("Active");
+            }
           }
         });
       });
@@ -81,79 +105,65 @@ export default function Edit(props) {
       });
   };*/
 
-  /*const validationSchema = Yup.object().shape({
-    firstName: Yup.string()
-      .min(1, "Must have a character")
-      .max(255, "Must be shorter thant 255")
-      .required("Must enter a name"),
-    email: Yup.string()
-      .email("Must be valid email")
-      .max(255, "Must be shorter thant 255")
-      .required("Must enter an email")
-  });*/
+  function handleChange(event) {
+    setSelected(event.target.value);
+  }
 
   function onSubmit(event) {
     event.preventDefault();
   }
 
   return (
-    <React.Fragment>
-      <form noValidate autoComplete="off">
+    <div>
+      <form className={classes.myForm} noValidate autoComplete="off">
         <TextField
+          className={classes.myTextField}
           id="outlined-basic"
           label="First Name"
           variant="outlined"
           value={firstName}
           onChange={e => setFirstName(e.target.value)}
         />
+        <TextField
+          className={classes.myTextField}
+          id="outlined-basic"
+          label="Last Name"
+          variant="outlined"
+          value={lastName}
+          onChange={e => setLastName(e.target.value)}
+        />
+        <TextField
+          className={classes.myTextField}
+          id="outlined-basic"
+          label="Email"
+          variant="outlined"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <TextField
+          className={classes.myTextField}
+          id="outlined-basic"
+          label="Cell Phone"
+          variant="outlined"
+          value={cellPhone}
+          onChange={e => setCellPhone(e.target.value)}
+        />
+        <RadioGroup onChange={handleChange} value={selected}>
+          <FormControlLabel
+            value="Active"
+            control={<Radio />}
+            label="Active"
+            labelPlacement="start"
+          />
+          <FormControlLabel
+            value="Inactive"
+            control={<Radio />}
+            label="Inactive"
+            labelPlacement="start"
+          />
+        </RadioGroup>
       </form>
-      {/*<FormikForm />*/}
-      {/*<Formik
-        initialValues={{ firstName: "", email: "" }}
-        validationSchema={validationSchema}
-      >
-        {({ values, errors, touched, handleChange, handleBlur }) => (
-          <form>
-            {JSON.stringify(values)}
-            <div className="wrapOne">
-              <label htmlFor="firstName">
-                firstName:
-                <input
-                  placeholder="first name"
-                  name="firstName"
-                  type="text"
-                  id="firstName"
-                  placeholder="Enter first name"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.firstName}
-                  className={
-                    touched.firstName && errors.firstName ? "has-error" : null
-                  }
-                />
-              </label>
-              <label htmlFor="email">
-                Email:
-                <input
-                  placeholder="email"
-                  name="email"
-                  type="email"
-                  id="email"
-                  placeholder="Enter email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                  className={touched.email && errors.email ? "has-error" : null}
-                />
-              </label>
-              <div className="formik-submit">
-                <button type="submit">Submit</button>
-              </div>
-            </div>
-          </form>
-        )}
-      </Formik>*/}
-    </React.Fragment>
+    </div>
 
     /* <form onSubmit={handleSubmit}>
       <div className="wrapOne">
