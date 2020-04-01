@@ -8,7 +8,8 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-
+import Button from "@material-ui/core/Button";
+//import SaveIcon from "@material-ui/icons/Save";
 import { FormHelperText } from "@material-ui/core";
 
 const nanoid = require("nanoid");
@@ -30,6 +31,11 @@ const useStyles = makeStyles({
   },
   myTextField: {
     marginBottom: "18px"
+  },
+  myRadioButtons: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start"
   }
 });
 
@@ -148,7 +154,11 @@ export default function Edit(props) {
           value={cellPhone}
           onChange={e => setCellPhone(e.target.value)}
         />
-        <RadioGroup onChange={handleChange} value={selected}>
+        <RadioGroup
+          onChange={handleChange}
+          value={selected}
+          className={classes.myRadioButtons}
+        >
           <FormControlLabel
             value="Active"
             control={<Radio />}
@@ -162,6 +172,9 @@ export default function Edit(props) {
             labelPlacement="start"
           />
         </RadioGroup>
+        <Button variant="contained" color="primary" size="large">
+          Save
+        </Button>
       </form>
     </div>
 
