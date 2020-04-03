@@ -88,14 +88,13 @@ class Table extends Component {
                   <td>{row.email}</td>
                   <td>{row.cellPhone}</td>
                   <td>
-                    {row.status ? (
+                    {row.status === "active" ? (
                       <FontAwesomeIcon icon="thumbs-up" />
                     ) : (
                       <FontAwesomeIcon icon="thumbs-down" />
                     )}
                   </td>
                   <td>
-                    {/*<NavLink to="/edit">*/}
                     <button>
                       <FontAwesomeIcon
                         className="editIco"
@@ -106,7 +105,6 @@ class Table extends Component {
                         }}
                       />
                     </button>{" "}
-                    {/*</NavLink>*/}
                     <button>
                       <FontAwesomeIcon
                         className="editIco"

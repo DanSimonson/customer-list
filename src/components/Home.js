@@ -35,10 +35,15 @@ class Home extends Component {
           documentArray.push(...docData);
           docData.pop();
         });
-        this.setState({
-          loading: false,
-          data: documentArray
-        });
+        this.setState(
+          {
+            loading: false,
+            data: documentArray
+          },
+          () => {
+            console.log("this.state.data: ", this.state.data);
+          }
+        );
       })
       .catch(function(error) {
         console.log("Error getting document:", error);
