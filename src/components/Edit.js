@@ -48,9 +48,9 @@ export default function Edit(props) {
   const [cellPhone, setCellPhone] = useState("");
   const [toggleOn, setToggleOn] = useState("");
   const [toggleOff, setToggleOff] = useState("");
-  const [data, setData] = useState({ hits: [] });
+  //const [data, setData] = useState({ hits: [] });
   //console.log("props: ", props);
-  //console.log("props.location.state.id: ", props.location.state.id);
+  console.log("props.location.state.id: ", props.location.state.id);
 
   useEffect(() => {
     const db = firebase.firestore();
@@ -64,10 +64,10 @@ export default function Edit(props) {
             setLastName(doc.data().lastName);
             setEmail(doc.data().email);
             setCellPhone(doc.data().cellPhone);
-            if (doc.data().status) {
-              setSelected("Active");
+            if (doc.data().status === "active") {
+              setSelected("active");
             } else {
-              setSelected("Active");
+              setSelected("inactive");
             }
           }
         });
@@ -76,38 +76,29 @@ export default function Edit(props) {
       //console.log("will unmount");
     };
   }, []);
-  /*const handleSubmit = evt => {
-    evt.preventDefault();
-    postData();
-  };*/
-  /*const postData = () => {
-    const id = nanoid();
-    const db = firebase.firestore();
-    //var washingtonRef = db.collection("cities").doc("DC");
-    //var dbRef = db.collection("cities").doc("DC");
-    let status;
-    if (toggleOn === "toggleOn") {
-      status = true;
-    } else if (toggleOff === "toggleOff") {
-      status = false;
-    }
 
+  const postData = () => {
+    const db = firebase.firestore();
+    let status;
     db.collection("customer")
-      .add({
-        cellPhone: cellPhone,
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
-        status: status,
-        userID: id
-      })
-      .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
+      .doc(props.location.state.id)
+      .set(
+        {
+          cellPhone: cellPhone,
+          email: email,
+          firstName: firstName,
+          lastName: lastName,
+          status: selected
+        },
+        { merge: true }
+      )
+      .then(function() {
+        console.log("Document successfully written!");
       })
       .catch(function(error) {
         console.error("Error adding document: ", error);
       });
-  };*/
+  };
 
   function handleChange(event) {
     setSelected(event.target.value);
@@ -116,12 +107,8 @@ export default function Edit(props) {
   const handleSubmit = evt => {
     evt.preventDefault();
     console.log("handling submit now");
-    //postData();
+    postData();
   };
-
-  /*function onSubmit(event) {
-    event.preventDefault();
-  }*/
 
   return (
     <div>
@@ -169,13 +156,13 @@ export default function Edit(props) {
           className={classes.myRadioButtons}
         >
           <FormControlLabel
-            value="Active"
+            value="active"
             control={<Radio />}
             label="Active"
             labelPlacement="start"
           />
           <FormControlLabel
-            value="Inactive"
+            value="inactive"
             control={<Radio />}
             label="Inactive"
             labelPlacement="start"
