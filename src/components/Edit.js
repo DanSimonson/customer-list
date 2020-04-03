@@ -60,8 +60,6 @@ export default function Edit(props) {
         querySnapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
           if (props.location.state.id === doc.data().userID) {
-            //console.log("userID found: ", props.location.state.id);
-            console.log("doc.data().status: ", doc.data().status);
             setFirstName(doc.data().firstName);
             setLastName(doc.data().lastName);
             setEmail(doc.data().email);
@@ -115,13 +113,24 @@ export default function Edit(props) {
     setSelected(event.target.value);
   }
 
-  function onSubmit(event) {
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    console.log("handling submit now");
+    //postData();
+  };
+
+  /*function onSubmit(event) {
     event.preventDefault();
-  }
+  }*/
 
   return (
     <div>
-      <form className={classes.myForm} noValidate autoComplete="off">
+      <form
+        className={classes.myForm}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
         <TextField
           className={classes.myTextField}
           id="outlined-basic"
@@ -177,6 +186,7 @@ export default function Edit(props) {
           color="primary"
           size="large"
           startIcon={<SaveIcon />}
+          type="submit"
         >
           Save
         </Button>
