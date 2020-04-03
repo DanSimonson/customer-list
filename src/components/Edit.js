@@ -48,9 +48,6 @@ export default function Edit(props) {
   const [cellPhone, setCellPhone] = useState("");
   const [toggleOn, setToggleOn] = useState("");
   const [toggleOff, setToggleOff] = useState("");
-  //const [data, setData] = useState({ hits: [] });
-  //console.log("props: ", props);
-  console.log("props.location.state.id: ", props.location.state.id);
 
   useEffect(() => {
     const db = firebase.firestore();
@@ -72,9 +69,6 @@ export default function Edit(props) {
           }
         });
       });
-    return () => {
-      //console.log("will unmount");
-    };
   }, []);
 
   const postData = () => {
@@ -106,7 +100,6 @@ export default function Edit(props) {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    console.log("handling submit now");
     postData();
   };
 
@@ -120,7 +113,8 @@ export default function Edit(props) {
       >
         <TextField
           className={classes.myTextField}
-          id="outlined-basic"
+          required
+          id="outlined-required"
           label="First Name"
           variant="outlined"
           value={firstName}

@@ -20,14 +20,6 @@ const ValidationSchema = Yup.object().shape({
     .min(1, "Too Short!")
     .max(255, "Too Long!")
     .required("Required"),
-  /*name: Yup.string()
-    .min(1, "Too Short!")
-    .max(255, "Too Long!")
-    .required("Required"),
-  country: Yup.string()
-    .min(1, "Too Short!")
-    .max(255, "Too Long!")
-    .required("Required"),*/
   email: Yup.string()
     .email("Must be an email address")
     .max(255, "Too Long!")
@@ -40,7 +32,6 @@ class AddForm extends Component {
     this.state = {};
   }
   postData = data => {
-    //const id = nanoid();
     const db = firebase.firestore();
     let tempArray = [];
     tempArray.push(data);
@@ -55,7 +46,6 @@ class AddForm extends Component {
         userID: ""
       })
       .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
         db.collection("customer")
           .doc(docRef.id)
           .update({
@@ -90,7 +80,7 @@ class AddForm extends Component {
         >
           {({ values, isSubmitting, errors, touched }) => (
             <Form>
-              <pre>{JSON.stringify(values, null, 2)}</pre>
+              {/*<pre>{JSON.stringify(values, null, 2)}</pre>*/}
               <div className="input-row">
                 <label>First Name</label>
                 <Field
