@@ -40,7 +40,7 @@ class AddForm extends Component {
     this.state = {};
   }
   postData = data => {
-    const id = nanoid();
+    //const id = nanoid();
     const db = firebase.firestore();
     let tempArray = [];
     tempArray.push(data);
@@ -52,10 +52,15 @@ class AddForm extends Component {
         firstName: tempArray[0].firstName,
         lastName: tempArray[0].lastName,
         status: tempArray[0].status,
-        userID: id
+        userID: ""
       })
       .then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
+        db.collection("customer")
+          .doc(docRef.id)
+          .update({
+            userID: docRef.id
+          });
       })
       .catch(function(error) {
         console.error("Error adding document: ", error);
