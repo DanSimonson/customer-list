@@ -17,14 +17,14 @@ class Table extends Component {
     };
   }
   startCreateEventHandler = (event, ID) => {
-    console.log("ID: ", ID);
+    //console.log("ID: ", ID);
     this.setState(
       {
         creating: true,
         id: ID
       },
       () => {
-        console.log("this.state.id: ", this.state.id);
+        //console.log("this.state.id: ", this.state.id);
       }
     );
   };
@@ -39,8 +39,16 @@ class Table extends Component {
   };
 
   handleDelete = () => {
-    console.log("in delete function with id: ", this.state.id);
     const db = firebase.firestore();
+
+    //update page
+    for (let i = 0; i < this.props.data.length; i++) {
+      if (this.props.data[i].userID === this.state.id) {
+        this.props.data.splice(i, 1);
+      }
+    }
+
+    //delete from database
     db.collection("customer")
       .doc(this.state.id)
       .delete()
