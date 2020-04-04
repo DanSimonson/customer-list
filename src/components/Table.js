@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes, { nominalTypeHack } from "prop-types";
-//import AlertDialog from "./AlertDialog";
+import firebase from "../Firestore";
 import Modal from "../components/Modal/Modal";
 import Backdrop from "../components/Backdrop/Backdrop";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,12 +12,21 @@ class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: true,
+      id: "",
       creating: false
     };
   }
-  startCreateEventHandler = () => {
-    this.setState({ creating: true });
+  startCreateEventHandler = (event, ID) => {
+    console.log("ID: ", ID);
+    this.setState(
+      {
+        creating: true,
+        id: ID
+      },
+      () => {
+        console.log("this.state.id: ", this.state.id);
+      }
+    );
   };
 
   modalConfirmHandler = () => {
@@ -29,20 +38,20 @@ class Table extends Component {
     this.setState({ creating: false });
   };
 
-  //event, ID
   handleDelete = () => {
-    console.log("in delete function ");
-
-    /*db.collection("customer")
-      .doc(ID)
+    console.log("in delete function with id: ", this.state.id);
+    const db = firebase.firestore();
+    db.collection("customer")
+      .doc(this.state.id)
       .delete()
       .then(function() {
         console.log("Document successfully deleted!");
       })
       .catch(function(error) {
         console.error("Error removing document: ", error);
-      });*/
+      });
   };
+
   handleEdit = (event, ID) => {
     //push to edit page with correct route id stored in location
     this.props.history.push("/edit", { id: ID });
@@ -104,7 +113,10 @@ class Table extends Component {
                       <FontAwesomeIcon
                         className="editIco"
                         icon="trash"
-                        onClick={this.startCreateEventHandler}
+                        //onClick={this.startCreateEventHandler}
+                        onClick={event => {
+                          this.startCreateEventHandler(event, row.userID);
+                        }}
                         /*onClick={event => {
                           event.persist();
                           this.handleDelete(event, row.userID);
