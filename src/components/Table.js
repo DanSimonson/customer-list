@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import PropTypes, { nominalTypeHack } from "prop-types";
+//import AlertDialog from "./AlertDialog";
+import Modal from "../components/Modal/Modal";
+import Backdrop from "../components/Backdrop/Backdrop";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withRouter, NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,12 +11,45 @@ import "./Table.css";
 class Table extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      show: true,
+      creating: false
+    };
   }
-  handleDelete = (event, ID) => {};
+  startCreateEventHandler = () => {
+    this.setState({ creating: true });
+  };
+
+  modalConfirmHandler = () => {
+    this.setState({ creating: false });
+    this.handleDelete();
+  };
+
+  modalCancelHandler = () => {
+    this.setState({ creating: false });
+  };
+
+  //event, ID
+  handleDelete = () => {
+    console.log("in delete function ");
+
+    /*db.collection("customer")
+      .doc(ID)
+      .delete()
+      .then(function() {
+        console.log("Document successfully deleted!");
+      })
+      .catch(function(error) {
+        console.error("Error removing document: ", error);
+      });*/
+  };
   handleEdit = (event, ID) => {
     //push to edit page with correct route id stored in location
     this.props.history.push("/edit", { id: ID });
+  };
+
+  handleClick = () => {
+    console.log("clickity");
   };
 
   render() {
@@ -68,10 +104,11 @@ class Table extends Component {
                       <FontAwesomeIcon
                         className="editIco"
                         icon="trash"
-                        onClick={event => {
+                        onClick={this.startCreateEventHandler}
+                        /*onClick={event => {
                           event.persist();
                           this.handleDelete(event, row.userID);
-                        }}
+                        }}*/
                       />
                     </button>
                   </td>
@@ -80,6 +117,18 @@ class Table extends Component {
             </tbody>
           </table>
         </div>
+        {this.state.creating && <Backdrop />}
+        {this.state.creating && (
+          <Modal
+            title="Add Event"
+            canCancel
+            canConfirm
+            onCancel={this.modalCancelHandler}
+            onConfirm={this.modalConfirmHandler}
+          >
+            <p>Modal Content</p>
+          </Modal>
+        )}
       </main>
     );
   }
@@ -87,12 +136,5 @@ class Table extends Component {
 Table.propTypes = {
   type: PropTypes.array
 };
-/*class Box extends Component{
-  render(){
-    return(
-      <Div> <button>Edit</button> <button>Delete</button> </Div>
-    )
-  }
-}*/
 
 export default withRouter(Table);
