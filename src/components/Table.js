@@ -74,7 +74,7 @@ class Table extends Component {
                 <th>Status</th>
                 <th>
                   <NavLink to="/add">
-                    <button>
+                    <button className="myButton">
                       Add
                       <FontAwesomeIcon icon="user-plus" className="editIco" />
                     </button>
@@ -99,6 +99,7 @@ class Table extends Component {
                   </td>
                   <td>
                     <button
+                      className="myButton"
                       onClick={(event) => {
                         event.persist();
                         this.handleEdit(event, row.userID);
@@ -108,21 +109,13 @@ class Table extends Component {
                       <FontAwesomeIcon className="editIco" icon="edit" />
                     </button>{" "}
                     <button
+                      className="myButton"
                       onClick={(event) => {
                         this.startCreateEventHandler(event, row.userID);
                       }}
                     >
                       Delete
-                      <FontAwesomeIcon
-                        className="editIco"
-                        icon="trash"
-                        //onClick={this.startCreateEventHandler}
-
-                        /*onClick={event => {
-                          event.persist();
-                          this.handleDelete(event, row.userID);
-                        }}*/
-                      />
+                      <FontAwesomeIcon className="editIco" icon="trash" />
                     </button>
                   </td>
                 </tr>

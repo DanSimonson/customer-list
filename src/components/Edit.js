@@ -3,6 +3,7 @@ import firebase from "../Firestore";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import "./Edit.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -163,15 +164,16 @@ export default function Edit(props) {
             labelPlacement="start"
           />
         </RadioGroup>
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          startIcon={<SaveIcon />}
+        <button
+          //variant="contained"
+          //color="primary"
+          //size="large"
+          className="myButton"
+          //startIcon={<SaveIcon />}
           type="submit"
         >
           Save
-        </Button>
+        </button>
       </form>
     </div>
 

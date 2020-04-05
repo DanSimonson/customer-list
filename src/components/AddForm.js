@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Autosuggest from "react-autosuggest";
 import { Formik, Field, Form } from "formik";
 import { TextField, Button, Radio, Checkbox } from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./AddForm.css";
 import * as Yup from "yup";
 import axios from "axios";
 import Error from "./Errors";
@@ -137,7 +139,10 @@ class AddForm extends Component {
               </div>
 
               <div>
-                <button type="submit">Submit</button>
+                <button className="myButton" type="submit">
+                  Submit
+                  <FontAwesomeIcon icon="user-plus" className="editIco" />
+                </button>
               </div>
             </Form>
           )}
