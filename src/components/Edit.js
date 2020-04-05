@@ -22,21 +22,21 @@ const useStyles = makeStyles({
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     color: "white",
     height: 48,
-    padding: "0 30px"
+    padding: "0 30px",
   },
   myForm: {
     display: "flex",
     flexDirection: "column",
-    justifyItems: "center"
+    justifyItems: "center",
   },
   myTextField: {
-    marginBottom: "18px"
+    marginBottom: "18px",
   },
   myRadioButtons: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "flex-start"
-  }
+    justifyContent: "flex-start",
+  },
 });
 
 export default function Edit(props) {
@@ -53,8 +53,8 @@ export default function Edit(props) {
     const db = firebase.firestore();
     db.collection("customer")
       .get()
-      .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
           // doc.data() is never undefined for query doc snapshots
           if (props.location.state.id === doc.data().userID) {
             setFirstName(doc.data().firstName);
@@ -82,14 +82,14 @@ export default function Edit(props) {
           email: email,
           firstName: firstName,
           lastName: lastName,
-          status: selected
+          status: selected,
         },
         { merge: true }
       )
-      .then(function() {
+      .then(function () {
         console.log("Document successfully written!");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error("Error adding document: ", error);
       });
   };
@@ -98,9 +98,10 @@ export default function Edit(props) {
     setSelected(event.target.value);
   }
 
-  const handleSubmit = evt => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
     postData();
+    props.history.push("/");
   };
 
   return (
@@ -118,7 +119,7 @@ export default function Edit(props) {
           label="First Name"
           variant="outlined"
           value={firstName}
-          onChange={e => setFirstName(e.target.value)}
+          onChange={(e) => setFirstName(e.target.value)}
         />
         <TextField
           className={classes.myTextField}
@@ -126,7 +127,7 @@ export default function Edit(props) {
           label="Last Name"
           variant="outlined"
           value={lastName}
-          onChange={e => setLastName(e.target.value)}
+          onChange={(e) => setLastName(e.target.value)}
         />
         <TextField
           className={classes.myTextField}
@@ -134,7 +135,7 @@ export default function Edit(props) {
           label="Email"
           variant="outlined"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
           className={classes.myTextField}
@@ -142,7 +143,7 @@ export default function Edit(props) {
           label="Cell Phone"
           variant="outlined"
           value={cellPhone}
-          onChange={e => setCellPhone(e.target.value)}
+          onChange={(e) => setCellPhone(e.target.value)}
         />
         <RadioGroup
           onChange={handleChange}

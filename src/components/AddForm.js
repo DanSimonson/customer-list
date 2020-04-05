@@ -23,7 +23,7 @@ const ValidationSchema = Yup.object().shape({
   email: Yup.string()
     .email("Must be an email address")
     .max(255, "Too Long!")
-    .required("Required")
+    .required("Required"),
 });
 
 class AddForm extends Component {
@@ -31,7 +31,7 @@ class AddForm extends Component {
     super(props);
     this.state = {};
   }
-  postData = data => {
+  postData = (data) => {
     const db = firebase.firestore();
     let tempArray = [];
     tempArray.push(data);
@@ -43,16 +43,14 @@ class AddForm extends Component {
         firstName: tempArray[0].firstName,
         lastName: tempArray[0].lastName,
         status: tempArray[0].status,
-        userID: ""
+        userID: "",
       })
-      .then(function(docRef) {
-        db.collection("customer")
-          .doc(docRef.id)
-          .update({
-            userID: docRef.id
-          });
+      .then(function (docRef) {
+        db.collection("customer").doc(docRef.id).update({
+          userID: docRef.id,
+        });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error("Error adding document: ", error);
       });
   };
@@ -65,17 +63,18 @@ class AddForm extends Component {
             cellPhone: "",
             firstName: "",
             lastName: "",
-            email: ""
+            email: "",
           }}
           validationSchema={ValidationSchema}
-          validate={values => {
+          validate={(values) => {
             let errors = {};
             return errors;
           }}
-          onSubmit={(data, { setSubmitting }) => {
+          onSubmit={(data, { setSubmitting, resetForm }) => {
             setSubmitting(true);
             this.postData(data);
             setSubmitting(false);
+            resetForm();
           }}
         >
           {({ values, isSubmitting, errors, touched }) => (
@@ -84,7 +83,6 @@ class AddForm extends Component {
               <div className="input-row">
                 <label>First Name</label>
                 <Field
-                  placeholder="First Name"
                   name="firstName"
                   type="input"
                   as={TextField}
@@ -97,7 +95,6 @@ class AddForm extends Component {
               <div className="input-row">
                 <label>Last Name</label>
                 <Field
-                  placeholder="Last Name"
                   name="lastName"
                   type="input"
                   as={TextField}
@@ -110,7 +107,6 @@ class AddForm extends Component {
               <div className="input-row">
                 <label>Email</label>
                 <Field
-                  placeholder="Email"
                   name="email"
                   type="text"
                   as={TextField}

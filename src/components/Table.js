@@ -13,20 +13,14 @@ class Table extends Component {
     super(props);
     this.state = {
       id: "",
-      creating: false
+      creating: false,
     };
   }
   startCreateEventHandler = (event, ID) => {
-    //console.log("ID: ", ID);
-    this.setState(
-      {
-        creating: true,
-        id: ID
-      },
-      () => {
-        //console.log("this.state.id: ", this.state.id);
-      }
-    );
+    this.setState({
+      creating: true,
+      id: ID,
+    });
   };
 
   modalConfirmHandler = () => {
@@ -52,10 +46,10 @@ class Table extends Component {
     db.collection("customer")
       .doc(this.state.id)
       .delete()
-      .then(function() {
+      .then(function () {
         console.log("Document successfully deleted!");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error("Error removing document: ", error);
       });
   };
@@ -65,10 +59,6 @@ class Table extends Component {
     this.props.history.push("/edit", { id: ID });
   };
 
-  handleClick = () => {
-    console.log("clickity");
-  };
-
   render() {
     return (
       <main>
@@ -76,7 +66,7 @@ class Table extends Component {
           <table>
             <thead>
               <tr>
-                <th>User-Id</th>
+                {/*<th>User-Id</th>*/}
                 <th>First-Name</th>
                 <th>Last-Name</th>
                 <th>Email</th>
@@ -85,6 +75,7 @@ class Table extends Component {
                 <th>
                   <NavLink to="/add">
                     <button>
+                      Add
                       <FontAwesomeIcon icon="user-plus" className="editIco" />
                     </button>
                   </NavLink>
@@ -94,7 +85,7 @@ class Table extends Component {
             <tbody>
               {this.props.data.map((row, index) => (
                 <tr key={row.userID}>
-                  <td>{row.userID}</td>
+                  {/*<td>{row.userID}</td>*/}
                   <td>{row.firstName}</td>
                   <td>{row.lastName}</td>
                   <td>{row.email}</td>
@@ -107,24 +98,26 @@ class Table extends Component {
                     )}
                   </td>
                   <td>
-                    <button>
-                      <FontAwesomeIcon
-                        className="editIco"
-                        icon="edit"
-                        onClick={event => {
-                          event.persist();
-                          this.handleEdit(event, row.userID);
-                        }}
-                      />
+                    <button
+                      onClick={(event) => {
+                        event.persist();
+                        this.handleEdit(event, row.userID);
+                      }}
+                    >
+                      Edit
+                      <FontAwesomeIcon className="editIco" icon="edit" />
                     </button>{" "}
-                    <button>
+                    <button
+                      onClick={(event) => {
+                        this.startCreateEventHandler(event, row.userID);
+                      }}
+                    >
+                      Delete
                       <FontAwesomeIcon
                         className="editIco"
                         icon="trash"
                         //onClick={this.startCreateEventHandler}
-                        onClick={event => {
-                          this.startCreateEventHandler(event, row.userID);
-                        }}
+
                         /*onClick={event => {
                           event.persist();
                           this.handleDelete(event, row.userID);
@@ -154,7 +147,7 @@ class Table extends Component {
   }
 }
 Table.propTypes = {
-  type: PropTypes.array
+  type: PropTypes.array,
 };
 
 export default withRouter(Table);

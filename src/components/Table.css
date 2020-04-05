@@ -39,9 +39,10 @@ ul.dropdown {
 ul.dropdown:hover {
   display: block;
 }
-.editIcon {
-  width: 100px;
-  height: 100px;
+.editIco {
+  /*width: 100px;
+  height: 100px;*/
+  margin-left: 2px;
 }
 .dropdown-content {
   position: fixed;
@@ -54,4 +55,7 @@ ul.dropdown:hover {
 .menu {
   background: white;
   position: absolute;
+}
+.awesomeIcons {
+  margin-left: 2px;
 }
