@@ -164,15 +164,9 @@ export default function Edit(props) {
             labelPlacement="start"
           />
         </RadioGroup>
-        <button
-          //variant="contained"
-          //color="primary"
-          //size="large"
-          className="myButton"
-          //startIcon={<SaveIcon />}
-          type="submit"
-        >
+        <button className="myBtn" type="submit">
           Save
+          <FontAwesomeIcon icon="user-plus" className="editIco" />
         </button>
       </form>
     </div>

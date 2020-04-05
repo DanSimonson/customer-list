@@ -62,7 +62,7 @@ class Table extends Component {
   render() {
     return (
       <main>
-        <div>
+        <div className="myContainer">
           <table>
             <thead>
               <tr>
@@ -74,7 +74,7 @@ class Table extends Component {
                 <th>Status</th>
                 <th>
                   <NavLink to="/add">
-                    <button className="myButton">
+                    <button className="myBtn">
                       Add
                       <FontAwesomeIcon icon="user-plus" className="editIco" />
                     </button>
@@ -99,7 +99,7 @@ class Table extends Component {
                   </td>
                   <td>
                     <button
-                      className="myButton"
+                      className="myBtn"
                       onClick={(event) => {
                         event.persist();
                         this.handleEdit(event, row.userID);
@@ -109,7 +109,7 @@ class Table extends Component {
                       <FontAwesomeIcon className="editIco" icon="edit" />
                     </button>{" "}
                     <button
-                      className="myButton"
+                      className="myBtn"
                       onClick={(event) => {
                         this.startCreateEventHandler(event, row.userID);
                       }}
