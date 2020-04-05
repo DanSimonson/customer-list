@@ -137,13 +137,13 @@ class Table extends Component {
         {this.state.creating && <Backdrop />}
         {this.state.creating && (
           <Modal
-            title="Add Event"
+            title="Delete"
             canCancel
             canConfirm
             onCancel={this.modalCancelHandler}
             onConfirm={this.modalConfirmHandler}
           >
-            <p>Modal Content</p>
+            <p>Your data will be deleted permanently</p>
           </Modal>
         )}
       </main>
