@@ -5,8 +5,18 @@ import Modal from "../components/Modal/Modal";
 import Backdrop from "../components/Backdrop/Backdrop";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withRouter, NavLink } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import "./Table.css";
+
+const styles = (theme) => ({
+  root: {
+    backgroundColor: "red",
+  },
+  wrapper: {
+    //style="overflow-x:auto;
+    //style: "overflow-x:auto",
+  },
+});
 
 class Table extends Component {
   constructor(props) {
@@ -16,6 +26,7 @@ class Table extends Component {
       creating: false,
     };
   }
+
   startCreateEventHandler = (event, ID) => {
     this.setState({
       creating: true,
@@ -60,69 +71,69 @@ class Table extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <main>
-        <div className="myContainer">
-          <table>
-            <thead>
-              <tr>
-                {/*<th>User-Id</th>*/}
-                <th>First-Name</th>
-                <th>Last-Name</th>
-                <th>Email</th>
-                <th>Cell-Phone</th>
-                <th>Status</th>
-                <th>
-                  <NavLink to="/add">
-                    <button className="myBtn">
-                      Add
-                      <FontAwesomeIcon icon="user-plus" className="editIco" />
-                    </button>
-                  </NavLink>
-                </th>
+      <main className="wrapper">
+        <table>
+          <thead>
+            <tr>
+              {/*<th>User-Id</th>*/}
+              <th>First-Name</th>
+              <th>Last-Name</th>
+              <th>Email</th>
+              <th>Cell-Phone</th>
+              <th>Status</th>
+              <th>
+                <NavLink to="/add">
+                  <button className="myBtn">
+                    Add
+                    <FontAwesomeIcon icon="user-plus" className="editIco" />
+                  </button>
+                </NavLink>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.data.map((row, index) => (
+              <tr key={row.userID}>
+                {/*<td>{row.userID}</td>*/}
+                <td>{row.firstName}</td>
+                <td>{row.lastName}</td>
+                <td>{row.email}</td>
+                <td>{row.cellPhone}</td>
+                <td>
+                  {row.status === "active" ? (
+                    <FontAwesomeIcon icon="thumbs-up" />
+                  ) : (
+                    <FontAwesomeIcon icon="thumbs-down" />
+                  )}
+                </td>
+                <td>
+                  <button
+                    className="myBtn"
+                    onClick={(event) => {
+                      event.persist();
+                      this.handleEdit(event, row.userID);
+                    }}
+                  >
+                    Edit
+                    <FontAwesomeIcon className="editIco" icon="edit" />
+                  </button>{" "}
+                  <button
+                    className="myBtn"
+                    onClick={(event) => {
+                      this.startCreateEventHandler(event, row.userID);
+                    }}
+                  >
+                    Delete
+                    <FontAwesomeIcon className="editIco" icon="trash" />
+                  </button>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {this.props.data.map((row, index) => (
-                <tr key={row.userID}>
-                  {/*<td>{row.userID}</td>*/}
-                  <td>{row.firstName}</td>
-                  <td>{row.lastName}</td>
-                  <td>{row.email}</td>
-                  <td>{row.cellPhone}</td>
-                  <td>
-                    {row.status === "active" ? (
-                      <FontAwesomeIcon icon="thumbs-up" />
-                    ) : (
-                      <FontAwesomeIcon icon="thumbs-down" />
-                    )}
-                  </td>
-                  <td>
-                    <button
-                      className="myBtn"
-                      onClick={(event) => {
-                        event.persist();
-                        this.handleEdit(event, row.userID);
-                      }}
-                    >
-                      Edit
-                      <FontAwesomeIcon className="editIco" icon="edit" />
-                    </button>{" "}
-                    <button
-                      className="myBtn"
-                      onClick={(event) => {
-                        this.startCreateEventHandler(event, row.userID);
-                      }}
-                    >
-                      Delete
-                      <FontAwesomeIcon className="editIco" icon="trash" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
+
         {this.state.creating && <Backdrop />}
         {this.state.creating && (
           <Modal
@@ -142,5 +153,6 @@ class Table extends Component {
 Table.propTypes = {
   type: PropTypes.array,
 };
-
-export default withRouter(Table);
+//export default withStyles(styles)(Table);
+//export default withRouter(Table);
+export default withRouter(withStyles(styles)(Table));

@@ -16,11 +16,15 @@ th {
 }
 main {
   margin: 0 auto;
-  width: 100%;
+  width: 80rem;
+  height: 40rem;
+  background-color: #beef00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 table {
-  width: 100%;
-  /*border: 5px solid red;*/
+  background-color: #ffff;
 }
 .editIcon:hover {
   cursor: pointer;
@@ -80,6 +84,13 @@ ul.dropdown:hover {
   position: relative;
   top: 1px;
 }
-.myContainer {
+/*.myContainer {
   background-color: #beef00;
+  width: 90%;
+}*/
+
+@media only screen and (max-width: 896px) {
+  div.wrapper {
+    overflow-x: auto;
+  }
 }
