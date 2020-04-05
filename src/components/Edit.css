@@ -136,3 +136,12 @@
   position: relative;
   top: 1px;
 }
+.wrapper {
+  margin: 0 auto;
+  width: 80rem;
+  height: 40rem;
+  background-color: #beef00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

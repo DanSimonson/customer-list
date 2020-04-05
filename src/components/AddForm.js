@@ -3,7 +3,7 @@ import Autosuggest from "react-autosuggest";
 import { Formik, Field, Form } from "formik";
 import { TextField, Button, Radio, Checkbox } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import "./AddForm.css";
+import "./AddForm.css";
 import * as Yup from "yup";
 import axios from "axios";
 import Error from "./Errors";
@@ -58,7 +58,7 @@ class AddForm extends Component {
   };
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <Formik
           initialValues={{
             status: "",
