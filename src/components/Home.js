@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./Home.css";
 import firebase from "../Firestore";
 import Table from "./Table";
+import Toolbar from "./Toolbar/Toolbar";
+
 class Home extends Component {
   constructor(props) {
     super(props);

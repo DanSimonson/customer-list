@@ -4,6 +4,7 @@ import { Formik, Field, Form } from "formik";
 import { TextField, Button, Radio, Checkbox } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./AddForm.css";
+//import Toolbar from "./Toolbar/Toolbar";
 import * as Yup from "yup";
 import axios from "axios";
 import Error from "./Errors";
