@@ -9,12 +9,13 @@ import * as serviceWorker from "./serviceWorker";
 //import { BrowserRouter, NavLink, Route, Switch } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faThumbsDown,
   faThumbsUp,
   faEdit,
   faUserPlus,
-  faTrash
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faTrash, faEdit, faUserPlus, faThumbsDown, faThumbsUp);

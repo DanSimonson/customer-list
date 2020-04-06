@@ -8,6 +8,7 @@ import Backdrop from "./components/Backdrop/Backdrop";
 import Home from "./components/Home";
 import Edit from "./components/Edit";
 import Add from "./components/Add";
+import Footer from "./components/Footer";
 import Toolbar from "./components/Toolbar/Toolbar";
 class App extends Component {
   state = {
