@@ -9,13 +9,13 @@ class Home extends Component {
       showMenu: false,
       X: null,
       Y: null,
-      data: []
+      data: [],
     };
   }
   editToggle = () => {
     this.setState(
-      prevState => ({
-        showMenu: !prevState.showMenu
+      (prevState) => ({
+        showMenu: !prevState.showMenu,
       }),
       () => {
         console.log("showMenu: ", this.state.showMenu);
@@ -29,25 +29,25 @@ class Home extends Component {
     const db = firebase.firestore();
     db.collection("customer")
       .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
           docData.push(doc.data());
           documentArray.push(...docData);
           docData.pop();
         });
         this.setState({
           loading: false,
-          data: documentArray
+          data: documentArray,
         });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log("Error getting document:", error);
       });
   }
 
   render() {
     return (
-      <div className="App">
+      <div className="Home">
         <Table
           data={this.state.data}
           showMenu={this.state.showMenu}

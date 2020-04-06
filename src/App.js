@@ -9,13 +9,15 @@ import Add from "./components/Add";
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
-          <Route exact path="/" component={Home} />
-          <Route path="/edit" component={Edit} />
-          <Route path="/add" component={Add} />
-        </div>
-      </BrowserRouter>
+      <div className="App">
+        <BrowserRouter>
+          <div className="App">
+            <Route exact path="/" component={Home} />
+            <Route path="/edit" component={Edit} />
+            <Route path="/add" component={Add} />
+          </div>
+        </BrowserRouter>
+      </div>
     );
   }
 }
