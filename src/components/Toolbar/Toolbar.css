@@ -40,10 +40,11 @@
 }
 
 .spacer {
-  flex: 1;
+  /*flex: 1;*/
+  margin-right: 5rem;
 }
 
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
   .toolbar_navigation-items {
     display: none;
   }
@@ -52,4 +53,4 @@
   .toolbar__toggle-button {
     display: none;
   }
-}
+}*/

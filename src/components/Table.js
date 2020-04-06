@@ -77,7 +77,6 @@ class Table extends Component {
         <table>
           <thead>
             <tr>
-              {/*<th>User-Id</th>*/}
               <th>First-Name</th>
               <th>Last-Name</th>
               <th>Email</th>
@@ -96,7 +95,6 @@ class Table extends Component {
           <tbody>
             {this.props.data.map((row, index) => (
               <tr key={row.userID}>
-                {/*<td>{row.userID}</td>*/}
                 <td>{row.firstName}</td>
                 <td>{row.lastName}</td>
                 <td>{row.email}</td>
@@ -153,6 +151,5 @@ class Table extends Component {
 Table.propTypes = {
   type: PropTypes.array,
 };
-//export default withStyles(styles)(Table);
-//export default withRouter(Table);
+
 export default withRouter(withStyles(styles)(Table));

@@ -1,5 +1,5 @@
 .side-drawer {
-  height: 50%;
+  height: 100%;
   background: #ffff;
   box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -36,8 +36,8 @@
 .side-drawer a:active {
   color: #303f9f;
 }
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
   .side-drawer {
     display: none;
   }
-}
+}*/
