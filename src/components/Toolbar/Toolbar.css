@@ -11,7 +11,7 @@
   padding: 0 1;
 }
 .toolbar__logo {
-  margin-left: 0.5rem;
+  margin-left: 2rem;
 }
 .toolbar__logo a {
   color: #ffff;
@@ -21,6 +21,7 @@
 .toolbar_navigation-items a {
   color: #ffff;
   text-decoration: none;
+  margin-left: 18rem;
 }
 
 .toolbar_navigation-items a:hover,

@@ -14,9 +14,6 @@ const toolbar = (props) => {
   return (
     <header className="toolbar">
       <nav className="toolbar__navigation">
-        {/*<div className="toolbar__toggle-button">
-        <DrawerToggleButton click={props.drawerClickHandler} />{" "}
-        </div>*/}
         <div className="toolbar_navigation-items">
           <ul>
             <li>
@@ -26,7 +23,7 @@ const toolbar = (props) => {
         </div>
         <div className="spacer" />
         <div className="toolbar__logo">
-          <a href="/">MARIPOSAWEB.NET</a>
+          <a href="https://mariposaweb.net/">MARIPOSAWEB.NET</a>
         </div>
       </nav>
     </header>
