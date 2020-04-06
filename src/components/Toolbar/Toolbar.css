@@ -10,14 +10,7 @@
   align-items: center;
   padding: 0 1;
 }
-.toolbar__logo {
-  margin-left: 2rem;
-}
-.toolbar__logo a {
-  color: #ffff;
-  text-decoration: none;
-  font-size: 1.5em;
-}
+
 .toolbar_navigation-items a {
   color: #ffff;
   text-decoration: none;
@@ -66,14 +59,3 @@
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
 }
-
-/*@media (max-width: 768px) {
-  .toolbar_navigation-items {
-    display: none;
-  }
-}
-@media (min-width: 768px) {
-  .toolbar__toggle-button {
-    display: none;
-  }
-}*/

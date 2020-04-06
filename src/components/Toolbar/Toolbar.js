@@ -19,12 +19,12 @@ const toolbar = (props) => {
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
+            <li>
+              <a href="https://mariposaweb.net/">MARIPOSAWEB.NET</a>
+            </li>
           </ul>
         </div>
         <div className="spacer" />
-        <div className="toolbar__logo">
-          <a href="https://mariposaweb.net/">MARIPOSAWEB.NET</a>
-        </div>
       </nav>
     </header>
   );
