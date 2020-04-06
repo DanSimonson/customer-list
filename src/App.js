@@ -8,7 +8,7 @@ import Backdrop from "./components/Backdrop/Backdrop";
 import Home from "./components/Home";
 import Edit from "./components/Edit";
 import Add from "./components/Add";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
 import Toolbar from "./components/Toolbar/Toolbar";
 class App extends Component {
   state = {
@@ -40,7 +40,9 @@ class App extends Component {
           <Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
           {sideDrawer}
           {backdrop}
-
+          <Footer>
+            <div>footer content</div>
+          </Footer>
           <Route exact path="/" component={Home} />
           <Route path="/edit" component={Edit} />
           <Route path="/add" component={Add} />
