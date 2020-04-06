@@ -84,7 +84,7 @@ class AddForm extends Component {
             <Form>
               {/*<pre>{JSON.stringify(values, null, 2)}</pre>*/}
               <div className="input-row">
-                <label>First Name</label>
+                <label className="addSpace">First Name</label>
                 <Field
                   name="firstName"
                   type="input"
@@ -96,7 +96,7 @@ class AddForm extends Component {
                 <Error touched={touched.firstName} message={errors.firstName} />
               </div>
               <div className="input-row">
-                <label>Last Name</label>
+                <label className="addSpace">Last Name</label>
                 <Field
                   name="lastName"
                   type="input"
@@ -108,7 +108,7 @@ class AddForm extends Component {
                 <Error touched={touched.lastName} message={errors.lastName} />
               </div>
               <div className="input-row">
-                <label>Email</label>
+                <label className="addSpace">Email</label>
                 <Field
                   name="email"
                   type="text"
@@ -118,7 +118,7 @@ class AddForm extends Component {
                 <Error touched={touched.email} message={errors.email} />
               </div>
               <div className="input-row">
-                <label>Cell Phone</label>
+                <label className="addSpace">Cell Phone</label>
                 <Field
                   name="cellPhone"
                   type="input"
@@ -129,17 +129,17 @@ class AddForm extends Component {
                 />
                 <Error touched={touched.cellPhone} message={errors.cellPhone} />
               </div>
-              <div className="input-row">
+              <div className="input-row justify">
                 <label>Status</label>
               </div>
-              <div className="input-row">
+              <div className="input-row justify">
                 <label>Active</label>
                 <Field name="status" type="radio" value="active" as={Radio} />
                 <label>Inactive</label>
                 <Field name="status" type="radio" value="inactive" as={Radio} />
               </div>
 
-              <div>
+              <div className="justify">
                 <button className="myBtn" type="submit">
                   Submit
                   <FontAwesomeIcon icon="user-plus" className="editIco" />

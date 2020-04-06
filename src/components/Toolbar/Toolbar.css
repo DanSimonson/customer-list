@@ -1,7 +1,7 @@
 .toolbar {
   position: fixed;
   width: 100%;
-  background: #303f9f;
+  background: linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%); /*#303f9f;*/
   height: 56px;
 }
 .toolbar__navigation {
@@ -37,7 +37,7 @@
 .toolbar_navigation-items a {
   position: relative;
   font-size: 1.5em;
-  color: #fff; /*#000;*/
+  color: #fff;
   text-decoration: none;
 }
 .toolbar_navigation-items a:before {

@@ -3,16 +3,17 @@ import { render } from "react-dom";
 
 const footerStyle = {
   backgroundColor: "#303f9f;",
-  fontSize: "20px",
+  fontSize: "1.5em",
   color: "#ffff",
   /*borderTop: "1px solid #E7E7E7",*/
-  textAlign: "center",
+  textAlign: "left",
   padding: "20px",
   position: "fixed",
   left: "0",
   bottom: "0",
   height: "60px",
   width: "100%",
+  fontFamily: "Comic Neue, cursive",
 };
 
 const phantomStyle = {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import firebase from "./Firestore";
 import { Route, BrowserRouter } from "react-router-dom";
-//import Table from "./components/Table";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SideDrawer from "./components/SideDrawer/SideDrawer";
 import Backdrop from "./components/Backdrop/Backdrop";
 import Home from "./components/Home";
@@ -41,8 +41,12 @@ class App extends Component {
           {sideDrawer}
           {backdrop}
           <Footer>
-            <div>footer content</div>
+            <div className="footer">
+              Made With Love &nbsp;
+              <FontAwesomeIcon icon="heart" />
+            </div>
           </Footer>
+
           <Route exact path="/" component={Home} />
           <Route path="/edit" component={Edit} />
           <Route path="/add" component={Add} />

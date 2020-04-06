@@ -16,9 +16,10 @@ import {
   faEdit,
   faUserPlus,
   faTrash,
+  faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faTrash, faEdit, faUserPlus, faThumbsDown, faThumbsUp);
+library.add(faTrash, faEdit, faUserPlus, faThumbsDown, faThumbsUp, faHeart);
 
 ReactDOM.render(<App />, document.getElementById("root"));
 //
